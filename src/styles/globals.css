@@ -26,11 +26,12 @@
     border-radius: 50%;
     transform: rotate(-40deg);
 }
+
 #pokebola::before{
     content: '';
     width: 400px;
     height: 110px;
-    background-color: red;
+    background-color: rgb(226, 14, 14);
     position: absolute;
     border-radius: 50%;
     margin-left: -100px;

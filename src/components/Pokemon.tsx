@@ -17,7 +17,7 @@ interface PokemonData {
   const [pokemonName, setPokemonName] = useState<string>("");
   const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
   const [gifUrls, setGifUrls] = useState<string[]>([]);
-
+  
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -71,7 +71,11 @@ interface PokemonData {
 
       {pokemonData && (
         
-        <div className="flex flex-col text-center " >
+        <div className="flex flex-col text-center bg-gradient-to-b from-gray-500 via-blue-500 to-gray-500 " >
+        <div id="pokebola" >
+        <div id="detalle"></div>
+        </div>
+
           <div className=" bg-gradient-to-b from-gray-500 via-blue-500 to-gray-500">
           <SiPokemon className='flex flex-col text-[300px] text-[red] hover:text-textColor object-center pl-100'/>
           
@@ -94,9 +98,7 @@ interface PokemonData {
           <img className="rounded-10px lg:w-4/5 md:w-1 object-cover object-center rounded-lg md:mt-0 mt-1" key={url} src={url} alt="GIF" />
         ))}
        </div >
-       <div id="pokebola" >
-  <div id="detalle"></div>
- </div>
+     
 
       </div>
         
