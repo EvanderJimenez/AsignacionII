@@ -35,7 +35,7 @@ export default async function listGifs(req: NextApiRequest, res: NextApiResponse
           const typeResponse = await fetch(pokemonData.types[0].type.url)
           const typeData = await typeResponse.json()
 
-          const giphyResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${"z3c3q45cNAYqpVcu7BGbUWLsxAlJCGEk"}&q=${typeData.name}&limit=10`)
+          const giphyResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${"z3c3q45cNAYqpVcu7BGbUWLsxAlJCGEk"}&q=Pokemon+${typeData.name}+combat&limit=10`)
           const giphyData = await giphyResponse.json()
 
           const gifs = giphyData.data.map((gif: any) => gif.images.original.url)

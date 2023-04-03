@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const generationData = await generationResponse.json();
       const pokemonGeneration = generationData.name;
 
-      const { data: gifs } = await giphyFetch.search(pokemonData.name, {
+      const { data: gifs } = await giphyFetch.search(`Pokemon ${pokemonData.name}`, {
         limit: 5,
       });
 

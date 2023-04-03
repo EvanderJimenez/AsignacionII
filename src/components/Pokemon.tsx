@@ -39,6 +39,39 @@ const Pokemon = (): JSX.Element => {
     }
   }, [pokemonData, pokemonName]);
 
+  useLayoutEffect(() => {
+    if (pokemonData) {
+      const type = pokemonData.type[0];
+      const background =
+        {
+          normal: "bg-gray-400",
+          fire: "bg-red-500",
+          water: "bg-blue-500",
+          electric: "bg-yellow-500",
+          grass: "bg-green-500",
+          ice: "bg-blue-200",
+          fighting: "bg-red-700",
+          poison: "bg-purple-500",
+          ground: "bg-yellow-600",
+          flying: "bg-indigo-500",
+          psychic: "bg-pink-500",
+          bug: "bg-green-400",
+          rock: "bg-yellow-800",
+          ghost: "bg-purple-700",
+          dragon: "bg-red-900",
+          dark: "bg-black",
+          steel: "bg-gray-600",
+          fairy: "bg-pink-200",
+        }[type] || "bg-gray-400";
+      document.body.classList.add(background);
+      console.log("gg");
+      return () => {
+        document.body.classList.remove(background);
+        console.log("no gg");
+      };
+    }
+  }, [pokemonData]);
+
   return (
     <div>
       <div className="searchDiv grid gp10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-[10px] p-[3rem]">
