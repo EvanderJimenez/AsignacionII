@@ -18,6 +18,7 @@ const Pokemon = (): JSX.Element => {
   const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
   const [gifUrls, setGifUrls] = useState<string[]>([]);
   const [className, setClassName] = useState("pokebolaOpen");
+  const [classNameD, setClassNameD] = useState("detalleOpen");
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -32,9 +33,11 @@ const Pokemon = (): JSX.Element => {
   useLayoutEffect(() => {
     if (!pokemonData && pokemonName) {
       setClassName("pokebola");
+      setClassNameD("detalle");
       console.log("wait");
     } else {
       setClassName("pokebolaOpen");
+      setClassNameD("detalleOpen");
       console.log("auto");
     }
   }, [pokemonData, pokemonName]);
@@ -77,7 +80,7 @@ const Pokemon = (): JSX.Element => {
       <div className="searchDiv grid gp10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-[10px] p-[3rem]">
         <div className="object-right-top">
           <div className={className}>
-            <div className="detalle"></div>
+            <div className={classNameD}></div>
           </div>
         </div>
         <form action="" onSubmit={handleSubmit} className="flex">

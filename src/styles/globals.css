@@ -11,7 +11,7 @@
     border: 2px solid black;
     overflow: hidden;
     box-shadow: inset 20px -10px 0px 10px rgba(0, 0, 0, 0.5);
-   animation: rota 3s infinite;
+   animation: fall .40s ease-in-out,rota 3s infinite;
 }
 
 .pokebola::after{
@@ -31,7 +31,7 @@
     content: '';
     width: 400px;
     height: 110px;
-    background-color: rgb(226, 14, 14);
+    background-color: rgb(244, 236, 236);
     position: absolute;
     border-radius: 50%;
     margin-left: -100px;
@@ -94,14 +94,14 @@
     border: 2px solid black;
     overflow: hidden;
     box-shadow: inset 20px -10px 0px 10px rgba(0, 0, 0, 0.5);
-   animation: rota 3s infinite;
+   animation: fall .25s ease-in-out, rota 1.25s cubic-bezier(.36,.07,.19,.97);
 }
 
 .pokebolaOpen::after{
     content: "";
     width: 40px;
     height: 60px;
-    background-color:  whitesmoke;
+    background-color:  rgb(251, 25, 25);
     transition-duration: 1s red;
     position: absolute;
     top: 5%;
@@ -114,7 +114,7 @@
     content: '';
     width: 400px;
     height: 110px;
-    background-color: rgb(50, 6, 228);
+    background-color: rgb(228, 6, 6);
     position: absolute;
     border-radius: 50%;
     margin-left: -100px;
@@ -137,13 +137,12 @@
     content: "";
     width: 30px;
     height: 30px;
-    background-color: white;
+    background-color: rgb(8, 247, 32);
     position: absolute;
     border-radius: 50%;
     border: 2px solid black;
     top: 15%;
     left: 18%;
-    animation: atrapar 3s infinite;
 }
 
 @keyframes atrapar{
@@ -154,3 +153,10 @@
         background-color: yellow;
     }
 }
+
+@keyframes fall {
+    0% { top: -200px }
+    60% { top: 0 }
+    80% { top: -20px }
+    100% { top: 0 }
+  }
