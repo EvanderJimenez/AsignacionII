@@ -5,5 +5,5 @@ import Pokemon from "@/components/Pokemon";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  return <Pokemon />;
+  return <GifList />;
 }

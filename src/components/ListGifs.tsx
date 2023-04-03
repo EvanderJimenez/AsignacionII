@@ -9,6 +9,7 @@ function GifList() {
   const [pokemon, setPokemon] = useState("");
   const [gifs, setGifs] = useState<string[]>([]);
   const [className, setClassName] = useState("pokebolaOpen");
+  const [classNameD, setClassNameD] = useState("detalleOpen");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,10 +33,12 @@ function GifList() {
 
   useLayoutEffect(() => {
     if (pokemon.length > 0) {
-      setClassName("pokebola");
+      setClassName("pokebolaOpen");
+      setClassNameD("detalleOpen");
       console.log("wait");
     } else {
-      setClassName("pokebolaOpen");
+      setClassName("pokebola");
+      setClassNameD("detalle");
       console.log("auto");
     }
   }, [pokemon]);
@@ -44,7 +47,7 @@ function GifList() {
     <div>
       <div className=" flex searchDiv grid gp10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-[10px] p-[3rem]">
         <div className={className}>
-          <div className="detalle"></div>
+          <div className={classNameD}></div>
         </div>
         <form action="" onSubmit={handleSubmit} className="flex">
           <h1 className="flex logo text-[25px] text-gradient-to-r from-red-500 via-orange-500  weight-100%">
