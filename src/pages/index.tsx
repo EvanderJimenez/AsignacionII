@@ -1,9 +1,25 @@
-import { Inter } from "next/font/google";
-import GifList from "@/components/ListGifs";
-import Pokemon from "@/components/Pokemon";
+import GifList from '@/components/ListGifs'
+import Pokemon from '@/components/Pokemon'
+import React, { Component } from 'react'
 
-const inter = Inter({ subsets: ["latin"] });
+export default class Index extends Component {
+  state = {
+    showPokemon: false,
+    showGifList: false
+  }
 
-export default function Home() {
-  return <Pokemon />;
+  render() {
+    return (
+      <div>
+        <button className='' onClick={() => this.setState({ showPokemon: true , showGifList: false })}>
+          Show Pokemon
+        </button>
+        <button onClick={() => this.setState({ showGifList: true, showPokemon:false })}>
+          Show Gif List
+        </button>
+        {this.state.showPokemon && <Pokemon />}
+        {this.state.showGifList && <GifList />}
+      </div>
+    );
+  }
 }
