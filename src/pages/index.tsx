@@ -8,6 +8,18 @@ export default class Index extends Component {
     showGifList: false
   }
 
-export default function Home() {
-  return <Pokemon />;
+  render() {
+    return (
+      <div>
+        <button onClick={() => this.setState({ showPokemon: true, showGifList: false })}>
+          Show Pokemon
+        </button>
+        <button onClick={() => this.setState({ showGifList: true, showPokemon: false })}>
+          Show Gif List
+        </button>
+        {this.state.showPokemon && <Pokemon />}
+        {this.state.showGifList && <GifList />}
+      </div>
+    )
+  }
 }
