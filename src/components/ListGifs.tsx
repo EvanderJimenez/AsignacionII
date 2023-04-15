@@ -44,14 +44,14 @@ function GifList() {
   }, [pokemon]);
 
   return (
-    <div>
-      <div className=" flex searchDiv grid gp10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-[10px] p-[3rem]">
+    <div className=" border-black border-8">
+      <div className=" searchDiv grid gp10 bg-green-600  p-[3rem]">
         <div className={className}>
           <div className={classNameD}></div>
         </div>
         <form action="" onSubmit={handleSubmit} className="flex">
           <h1 className="flex logo text-[25px] text-gradient-to-r from-red-500 via-orange-500  weight-100%">
-            <strong>Find the </strong>Pokemon
+            <strong>Find the Pokemon</strong>
           </h1>
           <div
             className="firstDiv flex justify-between items-center rounded-[8px]
@@ -79,17 +79,14 @@ function GifList() {
               </div>
             </div>
             <AiOutlineCloseCircle className="text-[30px] text-[#a5a6a6] hover:text-textColor icon" />
-            <button
-              type="submit"
-              className='flex class="bg-yellow-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-white-700 hover:border-red-500 rounded'
-            >
+            <button type="submit" className="bg-yellow-500 border-yellow-300 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-white-700 hover:border-red-500 rounded">
               Search
             </button>
           </div>
         </form>
       </div>
-      <div className="pt-10 border-10 border-solid 1  justify-center bg-gradient-to-b from-blue-500 via-red-500 to-yellow-500 rounded-[10px] p-[3rem] ">
-        <div className="grid grid-cols-3 gap-4 pt-10 pl-10 pr-10">
+      <div className="pt-10 border-10 border-solid 1  justify-center bg-green-600  p-[3rem] ">
+        <div className="grid grid-wrap grid-cols-1 gap-4 pt-10 pl-10 pr-10 min-w-[200px] w-full">
           {gifs.map((gif) => (
             <img className="rounded-[10px]" key={gif} src={gif} alt="gif" />
           ))}
