@@ -46,7 +46,7 @@ function GifList() {
       setClassNameD("detalleOpen");
     } else {
       setClassName("pokebola");
-      setClassNameD("detalle");
+      setClassNameD("detalle"); 
     }
   }, [pokemon]);
 
