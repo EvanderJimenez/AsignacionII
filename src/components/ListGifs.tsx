@@ -1,16 +1,20 @@
 import { useState, useLayoutEffect } from "react";
 import { AiOutlineCloseCircle, AiOutlineSearch } from "react-icons/ai";
 
-interface Gif {
+interface PokemonData {
   url: string;
+  type: string;
 }
-
 function GifList() {
   const [pokemon, setPokemon] = useState("");
   const [gifs, setGifs] = useState<string[]>([]);
   const [className, setClassName] = useState("pokebolaOpen");
   const [classNameD, setClassNameD] = useState("detalleOpen");
   const [error, setError] = useState(false);
+
+  const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
+  let vecType: string = "";
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,7 +32,10 @@ function GifList() {
       setError(true);
     } else {
       const data = await response.json();
+      console.log(data);
+      vecType = data.type;
       setGifs(data.gifs);
+      setPokemonData(data);
       setError(false);
     }
   };
@@ -37,13 +44,41 @@ function GifList() {
     if (pokemon.length > 0) {
       setClassName("pokebolaOpen");
       setClassNameD("detalleOpen");
-      console.log("wait");
     } else {
       setClassName("pokebola");
       setClassNameD("detalle");
-      console.log("auto");
     }
   }, [pokemon]);
+
+  useLayoutEffect(() => {
+    if (pokemonData && pokemonData.type) {
+      const background =
+        {
+          normal: "bg-gray-400",
+          fire: "bg-red-500",
+          water: "bg-blue-500",
+          electric: "bg-yellow-500",
+          grass: "bg-green-500",
+          ice: "bg-blue-200",
+          fighting: "bg-red-700",
+          poison: "bg-purple-500",
+          ground: "bg-yellow-600",
+          flying: "bg-indigo-500",
+          psychic: "bg-pink-500",
+          bug: "bg-green-400",
+          rock: "bg-yellow-800",
+          ghost: "bg-purple-700",
+          dragon: "bg-red-900",
+          dark: "bg-black",
+          steel: "bg-gray-600",
+          fairy: "bg-pink-200",
+        }[pokemonData.type] || "bg-gray-400";
+      document.body.classList.add(background);
+      return () => {
+        document.body.classList.remove(background);
+      };
+    }
+  }, [pokemonData]);
 
   return (
     <div className="w-3/5 align-middle border-black border-8">

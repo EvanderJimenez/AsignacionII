@@ -10,7 +10,7 @@ export default class Index extends Component {
 
   render() {
     return (
-      <div className="flex flex-col text-center items-center bg-green-300">
+      <div className="flex flex-col text-center items-center">
         <h1 className="text-30 pr-30">
           <strong>Choose your rendering option</strong>
         </h1>
