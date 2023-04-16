@@ -21,7 +21,7 @@ export default class Index extends Component {
               this.setState({ showPokemon: true, showGifList: false })
             }
           >
-            Show pokemon in battle
+            Show data and gifs of this pokemon
           </button>
           <button
             className="bg-gray-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-r hover:border-purple-500 mr-2"
@@ -29,7 +29,7 @@ export default class Index extends Component {
               this.setState({ showGifList: true, showPokemon: false })
             }
           >
-            Show Gif List
+            Show gifs of this pokemon in battle
           </button>
         </div>
         {this.state.showPokemon && <Pokemon />}

@@ -24,7 +24,7 @@ function GifList() {
     });
 
     if (pokemon === "" || response.status != 200) {
-      setGifs([])
+      setGifs([]);
       setError(true);
     } else {
       const data = await response.json();
@@ -91,9 +91,9 @@ function GifList() {
         </form>
         {error && (
           <div className="flex justify-center items-center text-red-500 text-[20px] font-bold">
-            Pokemon not found
+            Pokémon not found: Re-enter name
           </div>
-        ) }
+        )}
       </div>
       <div className="pt-10 border-10 border-solid 1  justify-center bg-green-600  p-[3rem] ">
         <div className="grid grid-wrap grid-cols-1 gap-4 pt-10 pl-10 pr-10 min-w-[200px] w-full">
