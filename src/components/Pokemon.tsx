@@ -21,16 +21,27 @@ const Pokemon = (): JSX.Element => {
   const [className, setClassName] = useState("pokebolaOpen");
   const [classNameD, setClassNameD] = useState("detalleOpen");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    try{
-      e.preventDefault();
-      const response = await fetch(`/api/pokemon?pokemon=${pokemonName}`);
-      const data = await response.json();
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+
+    e.preventDefault();
+
+    const response = await fetch(`/api/pokemon?pokemon=${pokemonName}`);
+    const data = await response.json();
+
+    if (pokemonName === "" || data.gifUrls === null) {
+      setGifUrls([])
+      setPokemonData(null)
+      setError(true);
+    } else {
       setPokemonData(data);
       setGifUrls(data.gifUrls);
-    }catch(error){
-        alert("Invalid pokemon name");
+      setError(false);
     }
+
   };
 
   useLayoutEffect(() => {
@@ -84,9 +95,13 @@ const Pokemon = (): JSX.Element => {
             <div className={classNameD}></div>
           </div>
         </div>
-        <form action="" onSubmit={handleSubmit} className="flex-col justify-center">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex-col justify-center"
+        >
           <h1 className="flex logo text-[25px] text-gradient-to-r from-red-500 via-orange-500  weight-100%">
-            <strong>Find the Pokemon</strong> 
+            <strong>Find the Pokemon</strong>
           </h1>
           <div
             className="firstDiv flex justify-between items-center rounded-[8px]
@@ -114,41 +129,80 @@ const Pokemon = (): JSX.Element => {
               </div>
             </div>
             <div></div>
-            <button type="submit" className="bg-yellow-500 border-yellow-300 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-white-700 hover:border-red-500 rounded">
+            <button
+              type="submit"
+              className="bg-yellow-500 border-yellow-300 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-white-700 hover:border-red-500 rounded"
+            >
               Search
             </button>
           </div>
         </form>
+        {error && (
+          <div className="flex justify-center items-center text-red-500 text-[20px] font-bold">
+            Pokemon not found
+          </div>
+        )}
       </div>
 
       {pokemonData && (
         <div className="flex justify-center w-full">
           <div className="bg-green-600 w-full">
             <SiPokemon className=" text-[25vh]  text-[red] hover:text-textColor mx-auto" />
-            <h2 className="text-[40px]  font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">Name Pokemon :</h2>
+            <h2 className="text-[40px]  font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+              Name Pokemon :
+            </h2>
             <h2 className=" text-[5vh]  font-semibold text-[lightgray] hover:text-white pt-40px gap-[40]">
               <strong>{pokemonData.name}</strong>
             </h2>
-            <h2 className="text-[40px]  font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">Weight :</h2>
-            <p className="text-[5vh]  font-semibold text-[lightgray] hover:text-white"> {pokemonData.weight}</p>
-            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">Height :</h2>
-            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white"> {pokemonData.height}</p>
-            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">Type :</h2>
-            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white">{pokemonData.type}</p>
-            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">Generation :</h2>
-            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white"> {pokemonData.generation}</p>
-            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">Base Experience : </h2>
-            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white">{pokemonData.baseExperience}</p>
+            <h2 className="text-[40px]  font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+              Weight :
+            </h2>
+            <p className="text-[5vh]  font-semibold text-[lightgray] hover:text-white">
+              {" "}
+              {pokemonData.weight}
+            </p>
+            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+              Height :
+            </h2>
+            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white">
+              {" "}
+              {pokemonData.height}
+            </p>
+            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+              Type :
+            </h2>
+            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white">
+              {pokemonData.type}
+            </p>
+            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+              Generation :
+            </h2>
+            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white">
+              {" "}
+              {pokemonData.generation}
+            </p>
+            <h2 className="text-[40px] font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+              Base Experience :{" "}
+            </h2>
+            <p className="text-[5vh] font-semibold text-[lightgray] hover:text-white">
+              {pokemonData.baseExperience}
+            </p>
           </div>
           <div className=" flex justify-center items-center border-black  bg-green-600 w-full">
             <div className="grid grid-wrap grid-cols-1 gap-4 pt-10 pl-10 pr-10 min-w-[200px] w-full">
               {gifUrls.map((url) => (
-                <img className="h-48 w-64 rounded-10px hover:scale-125 transition-transform opa " key={url} src={url} alt="GIF" />
+                <img
+                  className="h-48 w-64 rounded-10px hover:scale-125 transition-transform opa "
+                  key={url}
+                  src={url}
+                  alt="GIF"
+                />
               ))}
             </div>
           </div>
         </div>
       )}
+      
     </div>
   );
 };

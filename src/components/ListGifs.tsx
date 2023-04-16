@@ -10,24 +10,26 @@ function GifList() {
   const [gifs, setGifs] = useState<string[]>([]);
   const [className, setClassName] = useState("pokebolaOpen");
   const [classNameD, setClassNameD] = useState("detalleOpen");
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      const response = await fetch("/api/list-gifs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ pokemon }),
-      });
+    const response = await fetch("/api/list-gifs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ pokemon }),
+    });
 
+    if (pokemon === "" || response.status != 200) {
+      setGifs([])
+      setError(true);
+    } else {
       const data = await response.json();
-
       setGifs(data.gifs);
-    } catch (error) {
-      console.error(error);
+      setError(false);
     }
   };
 
@@ -79,11 +81,19 @@ function GifList() {
               </div>
             </div>
             <AiOutlineCloseCircle className="text-[30px] text-[#a5a6a6] hover:text-textColor icon" />
-            <button type="submit" className="bg-yellow-500 border-yellow-300 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-white-700 hover:border-red-500 rounded">
+            <button
+              type="submit"
+              className="bg-yellow-500 border-yellow-300 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-white-700 hover:border-red-500 rounded"
+            >
               Search
             </button>
           </div>
         </form>
+        {error && (
+          <div className="flex justify-center items-center text-red-500 text-[20px] font-bold">
+            Pokemon not found
+          </div>
+        ) }
       </div>
       <div className="pt-10 border-10 border-solid 1  justify-center bg-green-600  p-[3rem] ">
         <div className="grid grid-wrap grid-cols-1 gap-4 pt-10 pl-10 pr-10 min-w-[200px] w-full">
